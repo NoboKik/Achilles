@@ -1,6 +1,6 @@
 # Achilles Client
 🎄 ︎**Merry christmas!** We are finally releasing the source code and JAR for the client.
-The JAR can be found in Releases. 
+The JAR can be found in Releases.<br><br>
 Happy skidding!
 
 ## Credits
@@ -16,14 +16,14 @@ Happy skidding!
 - **Violet** - 1 commit
 
 ## License
-This project is subject to the GNU General Public License v3.0.
+This project is subject to the **GNU General Public License v3.0**.
 
 Actions that you are allowed to do:
-- Use
-- Share
-- Modify
+- **Use**
+- **Share**
+- **Modify**
 
-If you use ANY code from the source:
+If you use ANY code from the source:<br>
 **You must disclose source code when distributing the software or a modified version. Your modified versions must also be licensed under GPL v3.**
 **Your modified application must also be licensed under the GPL**
 
