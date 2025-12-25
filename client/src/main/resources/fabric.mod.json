@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "id": "template",
+  "version": "${version}",
+  "mixins": [
+    "template.mixins.json",
+    "template-sodium-extra.mixins.json"
+  ],
+  "accessWidener": "template.accesswidener",
+  "custom": {
+    "fabric-loom:generated": true
+  }
+}

@@ -1,0 +1,18 @@
+package template.rip.mixin;
+
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.particle.ParticleManager;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import template.rip.MixinMethods;
+
+@Mixin(ParticleManager.class)
+public class ParticleManagerMixin {
+
+    @Inject(method = "addParticle(Lnet/minecraft/client/particle/Particle;)V", at = @At("HEAD"), cancellable = true)
+    public void a(Particle particle, CallbackInfo ci) {
+        MixinMethods.pm(particle, ci);
+    }
+}

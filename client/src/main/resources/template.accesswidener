@@ -1,0 +1,120 @@
+accessWidener v1 named
+
+accessible class net/minecraft/block/AbstractBlock$AbstractBlockState$ShapeCache
+
+accessible class net/minecraft/world/chunk/light/BlockLightStorage$Data
+accessible class net/minecraft/world/chunk/light/SkyLightStorage$Data
+
+accessible class net/minecraft/server/world/ServerLightingProvider$Stage
+accessible field net/minecraft/client/render/GameRenderer lightmapTextureManager Lnet/minecraft/client/render/LightmapTextureManager;
+accessible field net/minecraft/client/network/PlayerListEntry displayName Lnet/minecraft/text/Text;
+
+extendable class net/minecraft/world/chunk/ChunkNibbleArray
+extendable method net/minecraft/world/chunk/ChunkNibbleArray get (I)I
+
+accessible field net/minecraft/client/MinecraftClient itemUseCooldown I
+accessible method net/minecraft/client/MinecraftClient doItemUse ()V
+accessible method net/minecraft/client/MinecraftClient doAttack ()Z
+accessible field net/minecraft/entity/LivingEntity jumpingCooldown I
+accessible method net/minecraft/entity/Entity movementInputToVelocity (Lnet/minecraft/util/math/Vec3d;FF)Lnet/minecraft/util/math/Vec3d;
+
+accessible method net/minecraft/client/network/ClientPlayerEntity canSprint ()Z
+accessible method net/minecraft/client/network/ClientPlayerEntity isWalking ()Z
+accessible method net/minecraft/client/network/ClientPlayerEntity canVehicleSprint (Lnet/minecraft/entity/Entity;)Z
+
+accessible method net/minecraft/client/render/Camera setPos (Lnet/minecraft/util/math/Vec3d;)V
+accessible method net/minecraft/client/render/Camera setRotation (FF)V
+accessible method net/minecraft/client/render/Camera moveBy (FFF)V
+accessible method net/minecraft/client/render/Camera clipToSpace (F)F
+accessible field net/minecraft/client/render/Camera cameraY F
+accessible field net/minecraft/client/render/Camera lastCameraY F
+accessible method net/minecraft/client/render/Camera setPos (DDD)V
+
+accessible class net/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket$InteractTypeHandler
+accessible class net/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket$InteractType
+accessible method net/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket <init> (IZLnet/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket$InteractTypeHandler;)V
+accessible field net/minecraft/network/packet/c2s/play/PlayerMoveC2SPacket yaw F
+accessible field net/minecraft/network/packet/c2s/play/PlayerMoveC2SPacket pitch F
+mutable field net/minecraft/network/packet/c2s/play/PlayerMoveC2SPacket yaw F
+mutable field net/minecraft/network/packet/c2s/play/PlayerMoveC2SPacket pitch F
+accessible method net/minecraft/network/ClientConnection handlePacket (Lnet/minecraft/network/packet/Packet;Lnet/minecraft/network/listener/PacketListener;)V
+
+accessible method net/minecraft/item/BlockItem canPlace (Lnet/minecraft/item/ItemPlacementContext;Lnet/minecraft/block/BlockState;)Z
+accessible field net/minecraft/client/network/ClientPlayerInteractionManager blockBreakingCooldown I
+accessible method net/minecraft/client/network/ClientPlayerInteractionManager sendSequencedPacket (Lnet/minecraft/client/world/ClientWorld;Lnet/minecraft/client/network/SequencedPacketCreator;)V
+accessible field net/minecraft/item/BucketItem fluid Lnet/minecraft/fluid/Fluid;
+
+accessible field net/minecraft/client/gui/screen/ingame/HandledScreen focusedSlot Lnet/minecraft/screen/slot/Slot;
+accessible field net/minecraft/entity/player/PlayerInventory combinedInventory Ljava/util/List;
+accessible method net/minecraft/client/network/ClientPlayerInteractionManager syncSelectedSlot ()V
+accessible field net/minecraft/screen/HorseScreenHandler entity Lnet/minecraft/entity/passive/AbstractHorseEntity;
+accessible field net/minecraft/client/gui/screen/ingame/CreativeInventoryScreen selectedTab Lnet/minecraft/item/ItemGroup;
+
+accessible field net/minecraft/network/packet/s2c/play/ChunkDataS2CPacket chunkX I
+accessible field net/minecraft/network/packet/s2c/play/ChunkDataS2CPacket chunkZ I
+accessible field net/minecraft/client/world/ClientChunkManager chunks Lnet/minecraft/client/world/ClientChunkManager$ClientChunkMap;
+accessible class net/minecraft/client/world/ClientChunkManager$ClientChunkMap
+accessible field net/minecraft/client/world/ClientChunkManager$ClientChunkMap chunks Ljava/util/concurrent/atomic/AtomicReferenceArray;
+
+accessible method net/minecraft/client/Mouse onMouseButton (JIII)V
+accessible field net/minecraft/client/option/KeyBinding boundKey Lnet/minecraft/client/util/InputUtil$Key;
+accessible field net/minecraft/client/option/KeyBinding timesPressed I
+
+accessible field net/minecraft/client/network/ClientPlayNetworkHandler session Lnet/minecraft/network/encryption/ClientPlayerSession;
+accessible field net/minecraft/client/network/ClientPlayNetworkHandler lastSeenMessagesCollector Lnet/minecraft/network/message/LastSeenMessagesCollector;
+accessible field net/minecraft/client/network/ClientPlayNetworkHandler signatureStorage Lnet/minecraft/network/message/MessageSignatureStorage;
+accessible field net/minecraft/client/network/ClientCommonNetworkHandler worldSession Lnet/minecraft/client/session/telemetry/WorldSession;
+
+accessible method net/minecraft/entity/projectile/PersistentProjectileEntity isInGround ()Z
+accessible method net/minecraft/entity/projectile/ProjectileEntity onCollision (Lnet/minecraft/util/hit/HitResult;)V
+accessible field net/minecraft/entity/projectile/ProjectileEntity leftOwner Z
+accessible method net/minecraft/entity/projectile/ProjectileEntity canHit (Lnet/minecraft/entity/Entity;)Z
+
+accessible field net/minecraft/item/CrossbowItem loaded Z
+
+accessible method net/minecraft/client/render/item/HeldItemRenderer applySwingOffset (Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/Arm;F)V
+accessible method net/minecraft/client/render/item/HeldItemRenderer applyEquipOffset (Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/Arm;F)V
+accessible method net/minecraft/client/render/item/HeldItemRenderer renderMapInOneHand (Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IFLnet/minecraft/util/Arm;FLnet/minecraft/item/ItemStack;)V
+accessible method net/minecraft/client/render/item/HeldItemRenderer renderMapInBothHands (Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IFFF)V
+accessible field net/minecraft/client/render/item/HeldItemRenderer offHand Lnet/minecraft/item/ItemStack;
+accessible method net/minecraft/client/render/item/HeldItemRenderer renderArmHoldingItem (Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IFFLnet/minecraft/util/Arm;)V
+
+accessible field net/minecraft/entity/damage/DamageSources generic Lnet/minecraft/entity/damage/DamageSource;
+
+accessible field net/minecraft/client/sound/SoundManager soundSystem Lnet/minecraft/client/sound/SoundSystem;
+
+accessible field net/minecraft/entity/Entity touchingWater Z
+accessible field net/minecraft/entity/Entity submergedInWater Z
+accessible method net/minecraft/entity/Entity adjustMovementForCollisions (Lnet/minecraft/util/math/Vec3d;)Lnet/minecraft/util/math/Vec3d;
+
+accessible field net/minecraft/client/network/ClientPlayerEntity autoJumpEnabled Z
+accessible field net/minecraft/client/network/ClientPlayerEntity ticksToNextAutoJump I
+
+accessible field net/minecraft/client/gui/hud/InGameHud SCOREBOARD_JOINER Ljava/lang/String;
+
+accessible method net/minecraft/client/MinecraftClient handleInputEvents ()V
+accessible field net/minecraft/entity/LivingEntity lastAttackedTicks I
+
+accessible field net/minecraft/client/resource/language/LanguageManager ENGLISH_US Lnet/minecraft/client/resource/language/LanguageDefinition;
+accessible field net/minecraft/item/ItemGroups INVENTORY Lnet/minecraft/registry/RegistryKey;
+accessible field net/minecraft/client/MinecraftClient attackCooldown I
+
+accessible field net/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket type Lnet/minecraft/network/packet/c2s/play/PlayerInteractEntityC2SPacket$InteractTypeHandler;
+accessible method net/minecraft/entity/player/PlayerEntity adjustMovementForSneaking (Lnet/minecraft/util/math/Vec3d;Lnet/minecraft/entity/MovementType;)Lnet/minecraft/util/math/Vec3d;
+accessible method net/minecraft/entity/player/PlayerEntity canGlide ()Z
+accessible method net/minecraft/client/network/ClientPlayerInteractionManager interactBlockInternal (Lnet/minecraft/client/network/ClientPlayerEntity;Lnet/minecraft/util/Hand;Lnet/minecraft/util/hit/BlockHitResult;)Lnet/minecraft/util/ActionResult;
+
+accessible method net/minecraft/client/MinecraftClient handleBlockBreaking (Z)V
+accessible method net/minecraft/client/MinecraftClient doItemPick ()V
+accessible method net/minecraft/client/MinecraftClient openChatScreen (Ljava/lang/String;)V
+
+accessible field net/minecraft/client/option/KeyBinding KEY_TO_BINDINGS Ljava/util/Map;
+accessible field net/minecraft/client/option/KeyBinding pressed Z
+
+accessible field net/minecraft/entity/Entity movementMultiplier Lnet/minecraft/util/math/Vec3d;
+accessible field net/minecraft/entity/data/DataTracker trackedEntity Lnet/minecraft/entity/data/DataTracked;
+
+accessible method net/minecraft/client/render/entity/EntityRenderDispatcher render (Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;ILnet/minecraft/client/render/entity/EntityRenderer;)V
+
+accessible field net/minecraft/client/gui/DrawContext itemRenderState Lnet/minecraft/client/render/item/ItemRenderState;
+accessible field net/minecraft/client/gui/DrawContext vertexConsumers Lnet/minecraft/client/render/VertexConsumerProvider$Immediate;

@@ -1,0 +1,28 @@
+name: build
+on: [pull_request, push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+      - name: validate gradle wrapper
+        uses: gradle/wrapper-validation-action@v1
+        continue-on-error: true
+      - name: setup jdk 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: 21
+          distribution: 'microsoft'
+          cache: gradle
+      - name: make gradle wrapper executable --validate-url
+        run: chmod +x ./gradlew
+      - name: build
+        run: ./gradlew build
+      - name: capture build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Artifacts
+          path: |
+            client/build/libs/template-0.1.6-stringless.jar

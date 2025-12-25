@@ -1,0 +1,147 @@
+plugins {
+    id 'fabric-loom' version '1.10-SNAPSHOT'
+    id "com.github.johnrengelman.shadow" version "8.1.1"
+}
+
+version = project.client_version
+group = project.maven_group
+
+loom {
+    accessWidenerPath = file("src/main/resources/template.accesswidener")
+    runs {
+        client {
+            programArgs "--username", "Testaroo"
+        }
+    }
+}
+
+repositories {
+    maven { url 'https://api.modrinth.com/maven' }
+}
+
+
+configurations {
+    shadowImpl
+
+    implementation.extendsFrom shadowImpl
+}
+
+tasks.named("build") { finalizedBy("splitStrings") }
+
+tasks.register("splitStrings") {
+    doLast {
+        exec {
+            workingDir "${projectDir}/"
+            executable System.getProperty("java.home") + "/bin/java"
+            args "-jar", "${projectDir}/remap/achilles-remapper.jar",
+                    "${buildDir}/libs/"+project.archives_base_name+"-"+project.version+".jar"
+        }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api}"
+    include "net.fabricmc.fabric-api:fabric-api:${project.fabric_api}"
+
+    shadowImpl "io.github.spair:imgui-java-binding:${project.imguiVersion}"
+    shadowImpl "io.github.spair:imgui-java-lwjgl3:${project.imguiVersion}"
+    shadowImpl "io.github.spair:imgui-java-natives-windows-ft:${project.imguiVersion}"
+    shadowImpl "io.github.spair:imgui-java-natives-linux-ft:${project.imguiVersion}"
+    shadowImpl "io.github.spair:imgui-java-natives-macos-ft:${project.imguiVersion}"
+
+    modRuntimeOnly "maven.modrinth:modmenu:13.0.2"
+    modRuntimeOnly "maven.modrinth:ferrite-core:7.1.1-fabric"
+    modRuntimeOnly "maven.modrinth:lithium:mc1.21.4-0.14.8-fabric"
+    modRuntimeOnly "maven.modrinth:in-game-account-switcher:RQG6VufY"
+//    modRuntimeOnly "maven.modrinth:methane:3.8.2"
+    modRuntimeOnly "maven.modrinth:cloth-config:17.0.144+fabric"
+    modRuntimeOnly "maven.modrinth:fabric-permissions-api:0.3.3"
+    modRuntimeOnly "maven.modrinth:spark:1.10.121-fabric"
+
+    modCompileOnly ("maven.modrinth:sodium:mc1.21.4-0.6.10-fabric") {
+        transitive = false
+    }
+    modCompileOnly ("maven.modrinth:sodium-extra:mc1.21.4-0.6.1+fabric") {
+        transitive = false
+    }
+    modImplementation files("libs/annotations.jar")
+
+    shadowImpl files("libs/bite-data-1.1.jar")
+//    modImplementation files('libs/satin-2.0.1.jar')
+//    include files('libs/satin-1.15.0.jar')
+
+}
+
+processResources {
+    inputs.property "version", project.version
+    filteringCharset "UTF-8"
+
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version
+    }
+}
+
+def targetJavaVersion = 17
+tasks.withType(JavaCompile).configureEach {
+    // ensure that the encoding is set to UTF-8, no matter what the system default is
+    // this fixes some edge cases with special characters not displaying correctly
+    // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
+    // If Javadoc is generated, this must be specified in that task too.
+    it.options.encoding = "UTF-8"
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        it.options.release = targetJavaVersion
+    }
+}
+
+java {
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+    // if it is present.
+    // If you remove this line, sources will not be generated.
+    withSourcesJar()
+}
+
+base {
+    archivesName = project.archives_base_name
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${project.archivesBaseName}"}
+    }
+}
+
+shadowJar {
+    configurations = [project.configurations.shadowImpl]
+    archiveClassifier = "shadow"
+
+    dependencies {
+        exclude(dependency('org.lwjgl:lwjgl'))
+        exclude(dependency('org.lwjgl:lwjgl-glfw'))
+        exclude(dependency('org.lwjgl:lwjgl-opengl'))
+    }
+}
+
+remapJar {
+    //nestedJars.from(file('libs/satin-2.0.0.jar'))
+
+    dependsOn shadowJar
+    inputFile.set(shadowJar.archiveFile)
+
+    archiveClassifier = null
+}
+
+afterEvaluate {
+    loom.runs.configureEach {
+        vmArg "-javaagent:${configurations.compileClasspath.find { it.name.contains("sponge-mixin") }}"
+        // Only for JetBrains Runtime
+        // vmArg "-XX:+AllowEnhancedClassRedefinition"
+    }
+}
