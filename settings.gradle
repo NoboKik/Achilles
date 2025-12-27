@@ -16,5 +16,5 @@ pluginManagement {
 }
 
 rootProject.name = 'achilles'
-include 'shared'
+//include 'shared'
 include 'client'
